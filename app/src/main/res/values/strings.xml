@@ -1,7 +1,21 @@
 <resources>
+<!--    film-related strings-->
     <string name="app_name">LaraMoviesAndroid</string>
     <string name="film_title_label">Title</string>
     <string name="release_date_label">Release Date</string>
-    <string name="duration_label">Duration(Minutes)</string>
+    <string name="duration_label_edit">Duration(Minutes)</string>
+    <string name="duration_label">Duration</string>
     <string name="story_label">Story</string>
+    <string name="film_poster_description">Film Poster</string>
+    <string name="film_genre_label">Genre</string>
+    <string name="text_view_text_placeholder">Lorem ipsum</string>
+    <string name="additional_info_label">Additional Info</string>
+
+
+<!--    CRUD command button texts-->
+    <string name="close">Close</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+
+    <string name="api_url">http://192.168.100.201:8000/api/</string>
 </resources>
