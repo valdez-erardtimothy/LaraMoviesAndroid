@@ -44,10 +44,9 @@ public class FilmListFragment extends Fragment {
     private FilmListAdapter mFilmAdapter;
     private FragmentManager mParentFragmentManager;
 
-    public FilmListFragment(FragmentManager fm) {
+    public FilmListFragment() {
         super(R.layout.fragment_film_list);
-        this.mParentFragmentManager = fm;
-        Log.i(null, "Film List Fragment created");
+
     }
 
     private void sampleFilms() {
@@ -87,6 +86,7 @@ public class FilmListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_film_list, container, false);
+        mParentFragmentManager = this.getActivity().getSupportFragmentManager();
         this.mFilms = new ArrayList<Film>();
 //        this.sampleFilms();
         this.setMemberVariables(v);

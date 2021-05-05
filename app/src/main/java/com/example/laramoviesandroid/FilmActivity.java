@@ -25,7 +25,7 @@ public class FilmActivity extends AppCompatActivity {
     protected void showFilmListFragment() {
 //      get the placeholder layout for Fragment
         mFragmentManager.beginTransaction()
-            .replace(R.id.fl_film_activity_fragment_container, new FilmListFragment(mFragmentManager), null)
+            .replace(R.id.fl_film_activity_fragment_container, new FilmListFragment(), null)
             .commit();
 
     }
