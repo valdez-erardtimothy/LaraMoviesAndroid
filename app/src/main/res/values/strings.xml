@@ -18,4 +18,10 @@
     <string name="edit">Edit</string>
 
     <string name="api_url">http://192.168.100.201:8000/api/</string>
+
+
+<!--    titles/labels (for nav and fragment labels)-->
+    <string name="films">Films</string>
+    <string name="actors">Actors</string>
+    <string name="producers">Producers</string>
 </resources>
