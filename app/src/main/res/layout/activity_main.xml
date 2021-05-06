@@ -6,13 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/btn_main_films"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/films"
+        app:layout_constraintBottom_toTopOf="@+id/btn_main_actors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_main_actors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actors"
+        app:layout_constraintBottom_toTopOf="@+id/btn_main_producers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_films" />
+
+    <Button
+        android:id="@+id/btn_main_producers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/producers"
+        app:layout_constraintBottom_toTopOf="@+id/btn_main_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_actors" />
+
+    <Button
+        android:id="@+id/btn_main_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_producers" />
 </androidx.constraintlayout.widget.ConstraintLayout>

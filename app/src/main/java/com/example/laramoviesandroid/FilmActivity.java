@@ -2,6 +2,7 @@ package com.example.laramoviesandroid;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,6 @@ public class FilmActivity extends AppCompatActivity {
         this.setMemberProperties();
         this.showFilmListFragment();
 //        initially, this will show film list
-
     }
 
     protected void showFilmListFragment() {

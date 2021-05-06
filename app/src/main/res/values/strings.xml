@@ -1,5 +1,5 @@
 <resources>
-<!--    film-related strings-->
+    <!--    film-related strings-->
     <string name="app_name">LaraMoviesAndroid</string>
     <string name="film_title_label">Title</string>
     <string name="release_date_label">Release Date</string>
@@ -12,10 +12,22 @@
     <string name="additional_info_label">Additional Info</string>
 
 
-<!--    CRUD command button texts-->
+    <!--    CRUD command button texts-->
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
 
     <string name="api_url">http://192.168.100.201:8000/api/</string>
+
+<!--    labels-->
+    <string name="films">Films</string>
+    <string name="actors">Actors</string>
+    <string name="producers">Producers</string>
+    <string name="logout">Logout</string>
+
+<!--    login activity-->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email_label">E-mail</string>
+    <string name="password_label">Password</string>
 </resources>
