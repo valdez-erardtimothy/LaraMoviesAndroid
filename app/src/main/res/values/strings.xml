@@ -30,4 +30,8 @@
     <string name="register">Register</string>
     <string name="email_label">E-mail</string>
     <string name="password_label">Password</string>
+    <string name="name_label">Name</string>
+    <string name="remember_label">Remember me</string>
+    <string name="email_hint">example@mail.com</string>
+    <string name="password_hint">password</string>
 </resources>
