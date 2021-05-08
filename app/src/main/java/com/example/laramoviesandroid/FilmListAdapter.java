@@ -28,8 +28,8 @@ public class FilmListAdapter extends RecyclerView.Adapter<FilmListAdapter.FilmLi
 
     // the ViewHolder to be made
     public  class FilmListItemViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
-        private final TextView mTvTitle, mTvRelease, mTvDuration, mTvGenre;
-        private final ImageView mIvPoster;
+        private  TextView mTvTitle, mTvRelease, mTvDuration, mTvGenre;
+        private  ImageView mIvPoster;
         public Film currentFilm;
         public FilmListItemViewHolder(View view) {
             super(view);
