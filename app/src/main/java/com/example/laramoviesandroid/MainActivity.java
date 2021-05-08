@@ -1,6 +1,9 @@
 package com.example.laramoviesandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.laramoviesandroid.SQLiteClasses.RememberedUserManager;
+import com.example.laramoviesandroid.Singletons.GlobalMembers;
+import com.example.laramoviesandroid.authentication.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,11 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    String mAccessToken;
-    Button mButtonFilms;
-    Button mButtonActors;
-    Button mButtonProducers;
-    Button mButtonLogout;
+
+    private FragmentManager mFragmentManager;
+    private int mFragmentContainerId;
 
     Context mContext;
     @Override
@@ -39,39 +42,26 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 //        test activities for now
-        Intent intent = getIntent();
-        mAccessToken = intent.getStringExtra("access_token");
+        GlobalMembers globals = GlobalMembers.getInstance();
+        String accessToken = globals.accessToken;
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentContainerId = R.id.fl_main_fragment_container;
         mContext = this;
-        Log.i(null, "Main Activity accesss token:"+mAccessToken);
-        this.initializeMembers();
+        Log.i(null, "Main Activity accesss token:"+accessToken);
+        launchNewFragment(new MainMenuFragment(), false);
     }
 
-    /**
-     * put the activities we want to test here
-     */
-    public void launchTestActivity() {
-
-        Intent intent = new Intent(this, FilmActivity.class);
-        startActivity(intent);
+    public void launchNewFragment(Fragment fragment, boolean pushToBackStack) {
+         FragmentTransaction ft = mFragmentManager.beginTransaction();
+         if(pushToBackStack) {
+             ft.addToBackStack(null);
+         }
+         ft.replace(mFragmentContainerId, fragment).commit();
     }
 
-    void initializeMembers() {
-        mButtonFilms = (Button) findViewById(R.id.btn_main_films);
-        mButtonActors = (Button) findViewById(R.id.btn_main_actors);
-        mButtonProducers = (Button) findViewById(R.id.btn_main_producers);
-        mButtonLogout = (Button) findViewById(R.id.btn_main_logout);
 
-        this.initializeButtonListeners();
-    }
 
-    void initializeButtonListeners() {
-        mButtonLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.this.logout();
-            }
-        });
-    }
+
 
     void logout() {
         String url = getResources().getString(R.string.api_url) + "auth/logout";
@@ -118,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                String accessToken;
-                params.put("Authorization", "Bearer " + MainActivity.this.mAccessToken);
+                String accessToken = GlobalMembers.getInstance().accessToken;
+                params.put("Authorization", "Bearer " + accessToken);
                 return params;
             }
         };

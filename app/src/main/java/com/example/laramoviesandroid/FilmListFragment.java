@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.Singletons.GlobalMembers;
 import com.example.laramoviesandroid.models.Film;
 
 import org.json.JSONArray;
@@ -36,6 +38,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FilmListFragment extends Fragment {
     protected RecyclerView mRecyclerView;
@@ -50,39 +54,6 @@ public class FilmListFragment extends Fragment {
         Log.i(null, "Film List Fragment created");
     }
 
-    private void sampleFilms() {
-        for(int i = 0; i < 100; i++) {
-            this.mFilms.add(
-                    Film.builder()
-                            .setTitle("qwe")
-                            .setReleaseDate(new Date())
-                            .setGenre(1)
-                            .setDuration(180)
-                            .build()
-            );
-
-            this.mFilms.add(
-
-                    Film.builder()
-                            .setTitle("asd")
-                            .setReleaseDate(new Date())
-                            .setGenre(1)
-                            .setDuration(360)
-                            .build()
-            );
-            this.mFilms.add(
-
-                    Film.builder()
-                            .setTitle("zxc")
-                            .setReleaseDate(new Date())
-                            .setGenre(1)
-                            .setDuration(540)
-                            .build()
-            );
-        }
-
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -112,6 +83,7 @@ public class FilmListFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+//                        retrieval successful
                         Log.d("listquery", response.toString());
                         try {
                             JSONArray filmsJSON = response.getJSONArray("films");
@@ -163,7 +135,15 @@ public class FilmListFragment extends Fragment {
                         Log.e("volleyError", error.toString());
                     }
                 }
-        );
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                String accessToken = GlobalMembers.getInstance().accessToken;
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
 
         RequestQueue requestQueue= Volley.newRequestQueue(mContext);
         requestQueue.add(request);

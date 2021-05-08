@@ -1,6 +1,6 @@
 <resources>
-    <!--    film-related strings-->
     <string name="app_name">LaraMoviesAndroid</string>
+    <!--    film-related strings-->
     <string name="film_title_label">Title</string>
     <string name="release_date_label">Release Date</string>
     <string name="duration_label_edit">Duration(Minutes)</string>
@@ -10,22 +10,28 @@
     <string name="film_genre_label">Genre</string>
     <string name="text_view_text_placeholder">Lorem ipsum</string>
     <string name="additional_info_label">Additional Info</string>
-
+    <!--actor related strings-->
+    <string name="actor_portrait_description">Actor portrait</string>
+    <string name="actor_name_label">Name</string>
+    <string name="actor_notes_label">Notes </string>
+    <string name="actor_name_placeholder">@string/actor_name_label</string>
+    <string name="actor_notes_placeholder">Additional information about the actor</string>
 
     <!--    CRUD command button texts-->
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
 
     <string name="api_url">http://192.168.100.201:8000/api/</string>
 
-<!--    labels-->
+    <!--    labels-->
     <string name="films">Films</string>
     <string name="actors">Actors</string>
     <string name="producers">Producers</string>
     <string name="logout">Logout</string>
 
-<!--    login activity-->
+    <!--    login activity-->
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="email_label">E-mail</string>
@@ -34,4 +40,6 @@
     <string name="remember_label">Remember me</string>
     <string name="email_hint">example@mail.com</string>
     <string name="password_hint">password</string>
+    <string name="confirm_password_label">Confirm Password</string>
+
 </resources>

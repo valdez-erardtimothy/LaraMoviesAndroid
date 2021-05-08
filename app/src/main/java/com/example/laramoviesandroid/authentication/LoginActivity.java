@@ -1,4 +1,4 @@
-package com.example.laramoviesandroid;
+package com.example.laramoviesandroid.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +19,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.MainActivity;
+import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.SQLiteClasses.RememberedUserManager;
+import com.example.laramoviesandroid.Singletons.GlobalMembers;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,6 +81,13 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.attemptLogin(email, password, remember);
             }
         });
+
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoRegister();
+            }
+        });
     }
 
     protected void attemptLogin(String email, String password, Boolean remember) {
@@ -120,8 +130,9 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             // shift to the main activity
 
-                            Intent intent=new Intent(LoginActivity.this ,MainActivity.class);
-                            intent.putExtra("access_token",accessToken);
+                            Intent intent=new Intent(LoginActivity.this , MainActivity.class);
+//                            intent.putExtra("access_token",accessToken);
+                            GlobalMembers.getInstance().accessToken = accessToken;
                             LoginActivity.this.startActivity(intent);
                             finish();
 
@@ -140,6 +151,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
         );
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void gotoRegister() {
+
+        Intent registerIntent = new Intent(this, RegistrationActivity.class);
+        this.startActivity(registerIntent);
     }
 
 

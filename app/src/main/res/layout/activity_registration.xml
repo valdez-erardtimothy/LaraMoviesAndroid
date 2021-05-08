@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".authentication.RegistrationActivity">
+
+    <TextView
+        android:id="@+id/text_registration_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/name_label"
+        app:layout_constraintBottom_toTopOf="@+id/input_registration_name"
+        app:layout_constraintStart_toStartOf="@+id/input_registration_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_registration_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:padding="@dimen/default_padding"
+        app:layout_constraintBottom_toTopOf="@+id/text_registration_confirm_password_label"
+        app:layout_constraintStart_toStartOf="@+id/text_registration_confirm_password_label"
+        app:layout_constraintTop_toBottomOf="@+id/text_registration_password" />
+
+    <TextView
+        android:id="@+id/text_registration_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/password_label"
+        app:layout_constraintBottom_toTopOf="@+id/input_registration_password"
+        app:layout_constraintStart_toStartOf="@+id/input_registration_password"
+        app:layout_constraintTop_toBottomOf="@+id/input_registration_email" />
+
+    <EditText
+        android:id="@+id/input_registration_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:padding="@dimen/default_padding"
+        app:layout_constraintBottom_toTopOf="@+id/button_registration_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_registration_confirm_password_label" />
+
+    <TextView
+        android:id="@+id/text_registration_confirm_password_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="confi"
+        android:padding="@dimen/default_padding"
+        android:text="@string/confirm_password_label"
+        app:layout_constraintBottom_toTopOf="@+id/input_registration_confirm_password"
+        app:layout_constraintStart_toStartOf="@+id/input_registration_confirm_password"
+        app:layout_constraintTop_toBottomOf="@+id/input_registration_password" />
+
+    <EditText
+        android:id="@+id/input_registration_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/email_label"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/default_padding"
+        app:layout_constraintBottom_toTopOf="@+id/text_registration_password"
+        app:layout_constraintStart_toStartOf="@+id/text_registration_password"
+        app:layout_constraintTop_toBottomOf="@+id/text_registration_email_label" />
+
+    <TextView
+        android:id="@+id/text_registration_email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/email_label"
+        app:layout_constraintBottom_toTopOf="@+id/input_registration_email"
+        app:layout_constraintStart_toStartOf="@+id/input_registration_email"
+        app:layout_constraintTop_toBottomOf="@+id/input_registration_name" />
+
+    <EditText
+        android:id="@+id/input_registration_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/name_label"
+        android:inputType="textPersonName"
+        android:padding="@dimen/default_padding"
+        app:layout_constraintBottom_toTopOf="@+id/text_registration_email_label"
+        app:layout_constraintStart_toStartOf="@+id/text_registration_email_label"
+        app:layout_constraintTop_toBottomOf="@+id/text_registration_name_label" />
+
+    <Button
+        android:id="@+id/button_registration_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/register"
+        app:layout_constraintEnd_toStartOf="@+id/button_registration_cancel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_registration_confirm_password" />
+
+    <Button
+        android:id="@+id/button_registration_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_registration_register"
+        app:layout_constraintTop_toTopOf="@+id/button_registration_register" />
+</androidx.constraintlayout.widget.ConstraintLayout>
