@@ -1,4 +1,4 @@
-package films;
+package com.example.laramoviesandroid.films;
 
 import android.util.Log;
 import android.view.LayoutInflater;

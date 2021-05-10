@@ -19,8 +19,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.authentication.AuthenticatedJSONObjectRequest;
 import com.example.laramoviesandroid.models.FilmActor;
-import com.example.laramoviesandroid.producers.ProducerFormFragment;
-import com.example.laramoviesandroid.producers.ProducerListAdapter;
 
 import org.json.JSONObject;
 
@@ -101,7 +99,7 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
     void deleteFilmographyRequest(int position, FilmActor filmographyEntry, Context context) {
         AuthenticatedJSONObjectRequest req = new AuthenticatedJSONObjectRequest(
                 Request.Method.GET,
-                context.getResources().getString(R.string.api_url) + "films/" + filmographyEntry.getFilmId() + "/remove-film-actor/" + filmographyEntry.getActorId(),
+                context.getResources().getString(R.string.api_url) + "com/example/laramoviesandroid/" + filmographyEntry.getFilmId() + "/remove-film-actor/" + filmographyEntry.getActorId(),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override

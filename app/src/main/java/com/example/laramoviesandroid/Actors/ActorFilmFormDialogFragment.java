@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.authentication.AuthenticatedJSONObjectRequest;
@@ -102,7 +101,7 @@ public class ActorFilmFormDialogFragment extends DialogFragment {
 //        get all films for spinner
         AuthenticatedJSONObjectRequest req = new AuthenticatedJSONObjectRequest(
                 Request.Method.GET,
-                getResources().getString(R.string.api_url) + "films",
+                getResources().getString(R.string.api_url) + "com/example/laramoviesandroid",
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -111,7 +110,7 @@ public class ActorFilmFormDialogFragment extends DialogFragment {
                             int actor_film_iterator = 0;
                             int position = 0;
                             JSONObject response = new JSONObject(String.valueOf(serverResponse));
-                            JSONArray films = response.getJSONArray("films");
+                            JSONArray films = response.getJSONArray("com/example/laramoviesandroid");
                             for(int i = 0; i < films.length(); i++) {
                                 JSONObject film = new JSONObject(String.valueOf(films.getJSONObject(i)));
 
@@ -174,7 +173,7 @@ public class ActorFilmFormDialogFragment extends DialogFragment {
 
         AuthenticatedJSONObjectRequest req = new AuthenticatedJSONObjectRequest(
                 Request.Method.POST,
-                getResources().getString(R.string.api_url) + "films/submit-film-actor",
+                getResources().getString(R.string.api_url) + "com/example/laramoviesandroid/submit-film-actor",
                 params,
                 new Response.Listener<JSONObject>() {
                     @Override

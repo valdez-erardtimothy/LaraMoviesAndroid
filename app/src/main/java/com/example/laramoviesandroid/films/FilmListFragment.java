@@ -1,4 +1,4 @@
-package films;
+package com.example.laramoviesandroid.films;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,23 +29,19 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import films.FilmListAdapter;
 
 public class FilmListFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     private Context mContext;
     private ArrayList<Film> mFilms;
     private FilmListAdapter mFilmAdapter;
-    private FragmentManager mParentFragmentManager;
 
-    public FilmListFragment(FragmentManager fm) {
+
+    public FilmListFragment() {
         super(R.layout.fragment_film_list);
-        this.mParentFragmentManager = fm;
         Log.i(null, "Film List Fragment created");
     }
 
@@ -98,26 +93,14 @@ public class FilmListFragment extends Fragment {
                                 }
                                 Log.i(null, "genre id:" + Integer.toString(currentFilm.getInt("genre_id")));
 
-                                Film newFilm = Film.builder(currentFilm.getInt("id"))
-                                        .setTitle(currentFilm.getString("film_title"))
-                                        .setDuration(currentFilm.getInt("duration"))
-                                        .setGenre(currentFilm.getInt("genre_id"))
-                                        .setGenre(genre)
-                                        .setReleaseDate(
-                                                new SimpleDateFormat("yyyy-MM-dd")
-                                                        .parse(currentFilm.getString("release_date"))
-                                        )
-                                        .setPosterURL(currentFilm.getString("poster"))
-                                        .setAdditionalInfo(currentFilm.getString("additional_info"))
-                                        .setStory(currentFilm.getString("story"))
-                                        .build();
+                                Film newFilm = Film.newFilmFromJSON(currentFilm);
 
-                                newFilm.setJson(currentFilm);
                                 mFilms.add(newFilm);
-                                mFilmAdapter.notifyDataSetChanged();
+
 
                                 Log.i (null, "new film title:"+ newFilm.getTitle());
                             }
+                            mFilmAdapter.notifyDataSetChanged();
 
                         } catch (JSONException | ParseException e ) {
                             e.printStackTrace();
@@ -148,7 +131,7 @@ public class FilmListFragment extends Fragment {
     protected void setMemberVariables(View v){
         mContext = getContext();
         mRecyclerView = (RecyclerView) v.findViewById(R.id.rv_film_list);
-        mFilmAdapter = new FilmListAdapter(mFilms, mParentFragmentManager);
+        mFilmAdapter = new FilmListAdapter(mFilms, getChildFragmentManager());
 
         // set recycler view configuration
         mRecyclerView.setHasFixedSize(true);

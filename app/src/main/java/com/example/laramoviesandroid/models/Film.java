@@ -1,11 +1,13 @@
 package com.example.laramoviesandroid.models;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
-import com.example.laramoviesandroid.builders.FilmBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,15 +21,17 @@ public class Film {
     private int genreId;
     private String genre;
     private String posterURL;
-    private JSONObject json;
+    private ArrayList<FilmActor>filmActors;
+    private ArrayList<FilmProducer>filmProducers;
 
     public Film() {
-        this.id = 0; // set for creating new ID
+        this(0); // set for creating new ID
     }
 
     public Film(int id) {
-         this();
          this.id = id;
+         filmActors = new ArrayList<FilmActor>();
+         filmProducers = new ArrayList<FilmProducer>();
     }
 //  api-connecting methods
 //  not used as of now, can't find a pattern I like for this
@@ -35,12 +39,6 @@ public class Film {
     return null;
     }
 
-//  builder for easy making of film
-    public static FilmBuilder builder() {return new FilmBuilder();}
-
-    public static FilmBuilder builder(int id) {
-        return new FilmBuilder(id);
-    }
 
     /**
      * sets the film object attributes with data from json object
@@ -68,6 +66,42 @@ public class Film {
                 .setGenre(genre);
 
         return this;
+    }
+
+    public ArrayList<FilmActor> buildFilmActorsFromJSON(JSONObject filmDetails) throws JSONException {
+        filmActors.clear();
+        JSONArray filmActorsJSON =  filmDetails.getJSONArray("actors");
+        for(int i = 0; i < filmActorsJSON.length(); i++) {
+            JSONObject currentFilmActor = filmActorsJSON.getJSONObject(i);
+            Log.d(null, "currentFilmActor: " + currentFilmActor);
+            JSONObject pivot = currentFilmActor.getJSONObject("pivot");
+
+            this.filmActors.add(
+                    new FilmActor()
+                    .setFilmId(this.getId())
+                    .setFilmName(this.getTitle())
+                    .setActorId(pivot.getInt("actor_id"))
+                    .setActorName(currentFilmActor.getString("actor_fullname"))
+                    .setCharacterName(pivot.getString("character"))
+            );
+        }
+        return this.getFilmActors();
+    }
+
+    public ArrayList<FilmProducer> buildFilmProducersFromJSON(JSONObject filmDetails) throws  JSONException {
+        filmProducers.clear();
+        JSONArray filmProducersJSON = filmDetails.getJSONArray("producers");
+        for(int i = 0; i < filmProducersJSON.length(); i++) {
+            JSONObject currentFilmProducer = filmProducersJSON.getJSONObject(i);
+
+            this.filmProducers.add(
+                    new FilmProducer().setFilmId(this.getId())
+                    .setFilmTitle(this.getTitle())
+                    .setProducerId(currentFilmProducer.getInt("id"))
+                    .setProducerName(currentFilmProducer.getString("producer_fullname"))
+            );
+        }
+        return this.getFilmProducers();
     }
 
     public static Film newFilmFromJSON(JSONObject jsonData) throws JSONException, ParseException {
@@ -167,11 +201,21 @@ public class Film {
         return this;
     }
 
-    public JSONObject getJson() {
-        return json;
+    public ArrayList<FilmActor> getFilmActors() {
+        return filmActors;
     }
 
-    public void setJson(JSONObject json) {
-        this.json = json;
+    public Film setFilmActors(ArrayList<FilmActor> filmActors) {
+        this.filmActors = filmActors;
+        return this;
+    }
+
+    public ArrayList<FilmProducer> getFilmProducers() {
+        return filmProducers;
+    }
+
+    public Film setFilmProducers(ArrayList<FilmProducer> filmProducers) {
+        this.filmProducers = filmProducers;
+        return this;
     }
 }

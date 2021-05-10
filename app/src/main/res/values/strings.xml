@@ -10,6 +10,8 @@
     <string name="film_genre_label">Genre</string>
     <string name="text_view_text_placeholder">Lorem ipsum</string>
     <string name="additional_info_label">Additional Info</string>
+    <string name="film_actors_label">Cast</string>
+    <string name="film_producers_label">Producers</string>
 
     <!--actor related strings-->
     <string name="actor_portrait_description">Actor portrait</string>
@@ -80,4 +82,5 @@
     <string name="producer_add_title">Add a Producer</string>
     <string name="actor">Actor</string>
     <string name="add_actor_film_addeditactor">Add/Edit Actor Film For--</string>
+    <string name="as">as</string>
 </resources>
