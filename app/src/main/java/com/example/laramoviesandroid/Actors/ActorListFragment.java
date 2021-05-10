@@ -92,16 +92,16 @@ public class ActorListFragment extends Fragment {
                         for (int i = 0; i < actorsJSON.length(); i++) {
                             JSONObject currentActor = actorsJSON.getJSONObject(i);
                             Log.i(null, "actor acquired: " + currentActor);
-                            mActors.add(new Actor()
-                                    .setJsonData(currentActor)
-                                    .setId(currentActor.getInt("id"))
-                                    .setName(currentActor.getString("actor_fullname"))
-                                    .setPortraitUrl(currentActor.getString("portrait"))
-                                    .setNotes(currentActor.has("actor_notes")
-                                            ?currentActor.getString("actor_notes")
-                                            :"None"
-                                    )
-                            );
+//                            mActors.add(new Actor()
+//                                    .setId(currentActor.getInt("id"))
+//                                    .setName(currentActor.getString("actor_fullname"))
+//                                    .setPortraitUrl(currentActor.getString("portrait"))
+//                                    .setNotes(currentActor.has("actor_notes")
+//                                            ?currentActor.getString("actor_notes")
+//                                            :"None"
+//                                    )
+//                            );
+                            mActors.add(Actor.buildFromJSON(currentActor));
                             mActorAdapter.notifyDataSetChanged();
                         }
 
