@@ -1,12 +1,16 @@
 package com.example.laramoviesandroid.producers;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +18,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.Actors.ActorEditFragment;
+import com.example.laramoviesandroid.Actors.ActorListAdapter;
 import com.example.laramoviesandroid.MainActivity;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.authentication.AuthenticatedJSONObjectRequest;
@@ -50,6 +56,7 @@ public class ProducerListAdapter extends RecyclerView.Adapter<ProducerListAdapte
     @Override
     public void onBindViewHolder(@NonNull ProducerListItemViewHolder holder, int position) {
         Producer boundProducer = mProducers.get(position);
+        holder.boundProducer = boundProducer;
         holder.mTvName.setText(boundProducer.getName());
         holder.mTvEmail.setText(boundProducer.getEmail());
         holder.mTvWebsite.setText(boundProducer.getWebsite());
@@ -62,7 +69,7 @@ public class ProducerListAdapter extends RecyclerView.Adapter<ProducerListAdapte
 
     public class ProducerListItemViewHolder extends RecyclerView.ViewHolder implements
         View.OnLongClickListener{
-        private Producer selectedProducer;
+        private Producer boundProducer;
         private TextView mTvName, mTvEmail, mTvWebsite;
 
         public ProducerListItemViewHolder(@NonNull View itemView) {
@@ -70,10 +77,35 @@ public class ProducerListAdapter extends RecyclerView.Adapter<ProducerListAdapte
             mTvName = itemView.findViewById(R.id.text_producer_list_item_name);
             mTvWebsite = itemView.findViewById(R.id.text_producer_list_item_website);
             mTvEmail = itemView.findViewById(R.id.text_producer_list_item_email);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public boolean onLongClick(View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle(R.string.actions_title)
+                    .setItems(R.array.item_actions, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("actorlistlongpressaction", "Pressed which: " + Integer.toString(which));
+                            // The 'which' argument contains the index position
+                            // of the selected item
+                            switch (which) {
+                                case 0:
+                                    mainActivity.launchNewFragment(
+                                            ProducerFormFragment.newInstance(
+                                                    boundProducer,
+                                                    ProducerListAdapter.this,
+                                                    getAdapterPosition())
+                                            ,true
+                                    );
+                                    break;
+                                case 1:
+                                    // delete button
+                                    deleteRequest(boundProducer, getAdapterPosition(), v.getContext());
+                                    break;
+                            }
+                        }
+                    }).show();
             return false;
         }
     }
@@ -103,6 +135,30 @@ public class ProducerListAdapter extends RecyclerView.Adapter<ProducerListAdapte
         queue.add(producerListRequest);
     }
 
+    public void deleteRequest(Producer toDelete, int adapterPosition, Context context) {
+
+        AuthenticatedJSONObjectRequest deleteRequest = new AuthenticatedJSONObjectRequest(
+                Request.Method.GET,
+                context.getResources().getString(R.string.api_url) + "producers/" + Integer.toString(toDelete.getId())+"/delete",
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // delete successful
+                        try {
+                            Toast.makeText(context, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            removeProducer(adapterPosition);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+        );
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(deleteRequest);
+    }
+
     /**
      *
      * crud-related methods (these methods are for handling the display on recyclerview)
@@ -114,4 +170,10 @@ public class ProducerListAdapter extends RecyclerView.Adapter<ProducerListAdapte
         mProducers.add(toAdd);
         this.notifyItemInserted(getItemCount()-1);
     }
+
+    public void removeProducer(int adapterPosition) {
+        mProducers.remove(adapterPosition);
+        ProducerListAdapter.this.notifyItemRemoved(adapterPosition);
+    }
+
 }

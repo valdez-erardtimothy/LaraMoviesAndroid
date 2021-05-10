@@ -85,6 +85,11 @@ public class ProducerFormFragment extends Fragment {
         getActivity().setTitle(!mEditMode?R.string.producer_add_title:R.string.producer_edit_title);
         mBtnCancel = v.findViewById(R.id.button_producer_form_cancel);
         mBtnSubmit = v.findViewById(R.id.button_producer_form_submit);
+        if(mEditMode) {
+            mBtnSubmit.setText(R.string.edit);
+        } else {
+            mBtnSubmit.setText(R.string.add);
+        }
         setButtonListeners();
         retrieveProducerContent();
     }
