@@ -73,6 +73,7 @@ public class ActorFilmFormDialogFragment extends DialogFragment {
         mEditCharacterName = view.findViewById(R.id.edit_actor_film_form_character);
         mFilmsSpinner = (Spinner) view.findViewById(R.id.spinner_actor_film_form_films);
         mActorName = view.findViewById(R.id.text_actor_film_form_actor_name);
+        mActorName.setText(mActorFilm.getActorName());
         mSpinnerAdapter = new ActorFilmFormSpinnerAdapter(
                 getContext(),
 //                R.layout.fragment_actor_film_form_dialog,
@@ -189,12 +190,9 @@ public class ActorFilmFormDialogFragment extends DialogFragment {
 
                             String entityStatus = response.getString("action");
                             boolean isNewEntity = false;
-                            if(entityStatus == "update") {
-                                isNewEntity = false;
-                            } else if (entityStatus == "add") {
+                            if (entityStatus.equals("add")) {
                                 isNewEntity = true;
                             }
-
                             if(isNewEntity) {
                                 // add to parent adapter list
                                 mParentFilmographyAdapter.addFilmographyEntry(mActorFilm);

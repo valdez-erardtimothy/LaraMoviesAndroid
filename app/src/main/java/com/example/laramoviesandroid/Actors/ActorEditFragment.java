@@ -79,7 +79,7 @@ public class ActorEditFragment extends Fragment {
         mBtnChooseImage  = view.findViewById(R.id.button_actor_edit_choose_portrait);
         mRvActorFilmography = view.findViewById(R.id.rv_actor_edit_filmography);
         mRvActorFilmography.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvActorFilmography.setHasFixedSize(true);
+//        mRvActorFilmography.setHasFixedSize(true);
         mFilmographyAdapter = new ActorFilmographyAdapter(mActorToEdit.getFilmography(), true, getChildFragmentManager());
 
         mRvActorFilmography.setAdapter(mFilmographyAdapter);
