@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".Actors.ActorListFragment">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_actor_list_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_padding"
+        android:clickable="true"
+        android:src="@drawable/baseline_add_black_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_actor_list"
         android:layout_width="match_parent"

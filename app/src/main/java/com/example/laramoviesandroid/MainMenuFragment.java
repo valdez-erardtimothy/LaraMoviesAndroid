@@ -41,6 +41,7 @@ public class MainMenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
         initializeMembers(view);
+        getActivity().setTitle(R.string.main_menu_title);
         return view;
     }
 

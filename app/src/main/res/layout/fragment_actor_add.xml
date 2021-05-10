@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Actors.ActorAddFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/text_actor_add_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/actor_name_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_actor_add_name" />
+
+    <EditText
+        android:id="@+id/edit_actor_add_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/actor_name_placeholder"
+        android:inputType="textPersonName"
+        android:padding="@dimen/default_padding"
+        app:layout_constraintStart_toEndOf="@+id/text_actor_add_name_label"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_actor_add_notes_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/actor_notes_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_actor_add_notes" />
+
+    <EditText
+        android:id="@+id/edit_actor_add_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/actor_notes_placeholder"
+        android:inputType="textMultiLine|textPersonName"
+        android:padding="@dimen/default_padding"
+        app:layout_constraintStart_toStartOf="@+id/edit_actor_add_name"
+        app:layout_constraintTop_toBottomOf="@+id/edit_actor_add_name" />
+
+    <Button
+        android:id="@+id/button_actor_add_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/add"
+        app:layout_constraintEnd_toStartOf="@+id/button_actor_add_cancel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_actor_add_portrait" />
+
+    <Button
+        android:id="@+id/button_actor_add_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_actor_add_submit"
+        app:layout_constraintTop_toTopOf="@+id/button_actor_add_submit" />
+
+    <ImageView
+        android:id="@+id/image_actor_add_portrait"
+        android:layout_width="280dp"
+        android:layout_height="350dp"
+        android:contentDescription="@string/actor_portrait_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_actor_add_choose_image"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <Button
+        android:id="@+id/button_actor_add_choose_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_image_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_actor_add_notes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
