@@ -84,7 +84,7 @@ public class ActorEditFragment extends Fragment {
         mFilmographyAdapter = new ActorFilmographyAdapter(mActorToEdit.getFilmography(), true);
 
         mRvActorFilmography.setAdapter(mFilmographyAdapter);
-
+        getActivity().setTitle(R.string.actor_edit_title);
         this.setButtonListeners();
         this.setViewContents();
         return view;

@@ -58,6 +58,7 @@ public class ActorListFragment extends Fragment {
 
         initializeMembers(fragmentView);
         findAndRenderActors();
+        getActivity().setTitle(R.string.actor_list_title);
         return fragmentView;
     }
 

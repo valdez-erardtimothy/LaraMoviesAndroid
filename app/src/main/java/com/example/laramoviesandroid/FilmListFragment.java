@@ -62,6 +62,7 @@ public class FilmListFragment extends Fragment {
 //        this.sampleFilms();
         this.setMemberVariables(v);
         this.getFilmsAndRender();
+        getActivity().setTitle(R.string.film_list_title);
         return v;
 
     }

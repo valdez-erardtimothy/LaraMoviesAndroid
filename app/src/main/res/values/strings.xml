@@ -59,5 +59,15 @@
         <item>@string/delete</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+<!--    action bar titles-->
+    <string name="main_menu_title">@string/app_name</string>
+    <string name="actor_list_title">Actors</string>
+    <string name="actor_edit_title">Edit Actor</string>
+    <string name="actor_add_title">Add Actor</string>
+    <string name="film_list_title">Films</string>
+    <string name="film_edit_title">Edit Films</string>
+    <string name="film_add_title">Add a FIlm</string>
+    <string name="producer_list_title">Producers</string>
+    <string name="producer_edit_title">Edit Producer</string>
+    <string name="producer_add_title">Add a Producer</string>
 </resources>
