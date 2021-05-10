@@ -1,9 +1,8 @@
-package com.example.laramoviesandroid;
+package films;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.models.Film;
 import com.squareup.picasso.Picasso;
 

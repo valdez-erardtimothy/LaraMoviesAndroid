@@ -1,17 +1,12 @@
-package com.example.laramoviesandroid;
+package films;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,9 +17,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.Singletons.GlobalMembers;
 import com.example.laramoviesandroid.models.Film;
 
@@ -37,9 +32,10 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import films.FilmListAdapter;
 
 public class FilmListFragment extends Fragment {
     protected RecyclerView mRecyclerView;
