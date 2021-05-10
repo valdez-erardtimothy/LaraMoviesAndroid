@@ -122,6 +122,16 @@
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_actor_edit_notes"
                 tools:layout_editor_absoluteX="198dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_actor_edit_add_film"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="@dimen/default_padding"
+                android:src="@drawable/baseline_movie_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

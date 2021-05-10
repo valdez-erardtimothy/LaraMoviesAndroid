@@ -26,7 +26,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.authentication.AuthenticatedJSONObjectRequest;
 import com.example.laramoviesandroid.models.Actor;
+import com.example.laramoviesandroid.models.FilmActor;
 import com.example.laramoviesandroid.utilities.ImageUtilities;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -46,6 +48,7 @@ public class ActorEditFragment extends Fragment {
     Button mBtnCancel;
     Button mBtnChooseImage;
     RecyclerView mRvActorFilmography;
+    FloatingActionButton mFabAddActorFilm;
 
     Actor mActorToEdit;
     ActorFilmographyAdapter mFilmographyAdapter;
@@ -70,13 +73,14 @@ public class ActorEditFragment extends Fragment {
         mEditName = view.findViewById(R.id.input_actor_edit_name);
         mEditNotes = view.findViewById(R.id.input_actor_edit_notes);
         mBtnEdit = view.findViewById(R.id.button_actor_edit_submit);
+        mFabAddActorFilm = view.findViewById(R.id.fab_actor_edit_add_film);
         mIvPortrait = view.findViewById(R.id.image_actor_edit_portrait);
         mBtnCancel = view.findViewById(R.id.button_actor_edit_cancel);
         mBtnChooseImage  = view.findViewById(R.id.button_actor_edit_choose_portrait);
         mRvActorFilmography = view.findViewById(R.id.rv_actor_edit_filmography);
         mRvActorFilmography.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvActorFilmography.setHasFixedSize(true);
-        mFilmographyAdapter = new ActorFilmographyAdapter(mActorToEdit.getFilmography(), true);
+        mFilmographyAdapter = new ActorFilmographyAdapter(mActorToEdit.getFilmography(), true, getChildFragmentManager());
 
         mRvActorFilmography.setAdapter(mFilmographyAdapter);
         getActivity().setTitle(R.string.actor_edit_title);
@@ -139,6 +143,17 @@ public class ActorEditFragment extends Fragment {
                 submitEdit();
             }
         });
+        mFabAddActorFilm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActorFilmFormDialogFragment.newInstance(
+                        new FilmActor().setActorId(mActorToEdit.getId())
+                        .setActorName(mActorToEdit.getName())
+                        .setFilmId(0),
+                        mFilmographyAdapter
+                ).show(getChildFragmentManager(),null);
+            }
+        });
     }
 
     /**
@@ -170,6 +185,7 @@ public class ActorEditFragment extends Fragment {
 
     void submitEdit() {
         JSONObject requestParams = new JSONObject();
+
 //        Bitmap portraitBmp = ((BitmapDrawable) mIvPortrait.getDrawable()).getBitmap();
         mIvPortrait.buildDrawingCache();
         Bitmap portraitBmp = mIvPortrait.getDrawingCache();
