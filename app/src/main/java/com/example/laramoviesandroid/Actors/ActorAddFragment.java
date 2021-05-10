@@ -38,7 +38,6 @@ import static android.app.Activity.RESULT_OK;
  * create an instance of this fragment.
  */
 public class ActorAddFragment extends Fragment {
-    private ActorListAdapter mParentListAdapter;
     private EditText mName, mNotes;
     private Button mSubmit, mCancel, mChooseImage;
     private ImageView mIvPortrait;
@@ -54,9 +53,8 @@ public class ActorAddFragment extends Fragment {
      * @return A new instance of fragment ActorAddFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ActorAddFragment newInstance(ActorListAdapter parentListAdapter) {
+    public static ActorAddFragment newInstance() {
         ActorAddFragment fragment = new ActorAddFragment();
-        fragment.mParentListAdapter = parentListAdapter;
         return fragment;
     }
 
@@ -128,7 +126,6 @@ public class ActorAddFragment extends Fragment {
                         try {
                             Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                             Actor newActor = Actor.buildFromJSON(response.getJSONObject("actor"));
-                            mParentListAdapter.addActor(newActor);
 //                            get back to list upon edit
                             getActivity().onBackPressed();
                         } catch (JSONException e) {

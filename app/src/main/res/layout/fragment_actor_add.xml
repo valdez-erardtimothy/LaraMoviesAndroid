@@ -73,8 +73,8 @@
 
     <ImageView
         android:id="@+id/image_actor_add_portrait"
-        android:layout_width="280dp"
-        android:layout_height="350dp"
+        android:layout_width="352dp"
+        android:layout_height="440dp"
         android:contentDescription="@string/actor_portrait_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

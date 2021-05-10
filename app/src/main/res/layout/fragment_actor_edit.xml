@@ -13,7 +13,7 @@
         android:id="@+id/scrollView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Button
@@ -37,8 +37,8 @@
 
             <ImageView
                 android:id="@+id/image_actor_edit_portrait"
-                android:layout_width="wrap_content"
-                android:layout_height="439dp"
+                android:layout_width="352dp"
+                android:layout_height="440dp"
                 android:layout_marginTop="1dp"
                 android:contentDescription="@android:string/fingerprint_icon_content_description"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,18 @@
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_actor_edit_notes"
                 tools:layout_editor_absoluteX="198dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_actor_edit_add_film"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:padding="@dimen/default_padding"
+        android:src="@drawable/baseline_movie_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

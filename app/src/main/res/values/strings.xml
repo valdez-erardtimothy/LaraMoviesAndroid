@@ -22,7 +22,7 @@
     <string name="character_label">Character Name</string>
     <string name="portrait_dimen_tip">We recommend uploading to 8:10 ratio for best results</string>
 
-<!--    producer related strings-->
+    <!--    producer related strings-->
     <string name="producer_name_label">Producer</string>
     <string name="producer_email_label">Email</string>
     <string name="producer_website_label">Website</string>
@@ -78,4 +78,6 @@
     <string name="producer_list_title">Producers</string>
     <string name="producer_edit_title">Edit Producer</string>
     <string name="producer_add_title">Add a Producer</string>
+    <string name="actor">Actor</string>
+    <string name="add_actor_film_addeditactor">Add/Edit Actor Film For--</string>
 </resources>

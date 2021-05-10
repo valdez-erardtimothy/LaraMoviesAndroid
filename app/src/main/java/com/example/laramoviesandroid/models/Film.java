@@ -1,10 +1,12 @@
 package com.example.laramoviesandroid.models;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import com.example.laramoviesandroid.builders.FilmBuilder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Film {
@@ -40,17 +42,55 @@ public class Film {
         return new FilmBuilder(id);
     }
 
+    /**
+     * sets the film object attributes with data from json object
+     * @param jsonData the json object that will populate the Film object
+     * @return
+     * @throws JSONException
+     */
+    public Film buildFromJSON(JSONObject jsonData) throws JSONException, ParseException {
+        String genre;
+        try {
+            genre = new JSONObject(String.valueOf(jsonData.getJSONObject("genre"))).getString("genre");
+        } catch (JSONException e) {
+            genre = "None";
+        }
+        jsonData = new JSONObject(String.valueOf(jsonData));
+        this.setId(jsonData.getInt("id"))
+                .setTitle(jsonData.getString("film_title"))
+                .setStory(jsonData.getString("story"))
+                .setReleaseDate(new SimpleDateFormat("yyyy-mm-dd")
+                        .parse(jsonData.getString("release_date")))
+                .setPosterURL(jsonData.getString("poster"))
+                .setDuration(jsonData.getInt("duration"))
+                .setAdditionalInfo(jsonData.getString("additional_info"))
+                .setGenreId(jsonData.getInt("genre_id"))
+                .setGenre(genre);
+
+        return this;
+    }
+
+    public static Film newFilmFromJSON(JSONObject jsonData) throws JSONException, ParseException {
+        return new Film().buildFromJSON(jsonData);
+    }
+
 //  getters setters
     public int getId() {
         return id;
+    }
+
+    public Film setId(int id) {
+        this.id = id;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Film setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public Date getReleaseDate() {
@@ -60,8 +100,9 @@ public class Film {
         return new SimpleDateFormat("MMMM dd, yyyy").format(this.releaseDate);
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public Film setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+        return this;
     }
 
     public int getDuration() {
@@ -74,48 +115,56 @@ public class Film {
         return Integer.toString(hours) + " hours, " + Integer.toString(minutes) + "minutes";
     }
 
-    public void setDuration(int duration) {
+    public Film setDuration(int duration) {
         this.duration = duration;
+        return this;
     }
 
     public String getStory() {
         return story;
     }
 
-    public void setStory(String story) {
+    public Film setStory(String story) {
         this.story = story;
+        return this;
+
     }
 
     public String getAdditionalInfo() {
         return additionalInfo;
     }
 
-    public void setAdditionalInfo(String additional_info) {
+    public Film setAdditionalInfo(String additional_info) {
         this.additionalInfo = additional_info;
+        return this;
     }
 
     public int getGenreId() {
         return genreId;
     }
 
-    public void setGenreId(int genre_id) {
+    public Film setGenreId(int genre_id) {
         this.genreId = genre_id;
+        return this;
+
     }
 
     public String getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public Film setGenre(String genre) {
         this.genre = genre;
+        return this;
     }
 
     public String getPosterURL() {
         return posterURL;
     }
 
-    public void setPosterURL(String posterURL) {
+    public Film setPosterURL(String posterURL) {
         this.posterURL = posterURL;
+        return this;
     }
 
     public JSONObject getJson() {
