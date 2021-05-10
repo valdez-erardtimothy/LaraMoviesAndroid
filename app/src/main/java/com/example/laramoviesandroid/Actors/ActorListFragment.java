@@ -3,6 +3,7 @@ package com.example.laramoviesandroid.Actors;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,7 +81,7 @@ public class ActorListFragment extends Fragment {
         mActors = new ArrayList<Actor>();
         mActorAdapter = new ActorListAdapter(mActors, getActivity().getSupportFragmentManager());
         mActorRecyclerView.setHasFixedSize(true);
-        mActorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mActorRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mActorRecyclerView.setAdapter(mActorAdapter);
         mFabAdd = v.findViewById(R.id.fab_actor_list_add);
         this.initializeButtonListeners();
