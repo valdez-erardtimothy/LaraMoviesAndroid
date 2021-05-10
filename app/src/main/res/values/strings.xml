@@ -22,6 +22,13 @@
     <string name="character_label">Character Name</string>
     <string name="portrait_dimen_tip">We recommend uploading to 8:10 ratio for best results</string>
 
+<!--    producer related strings-->
+    <string name="producer_name_label">Producer</string>
+    <string name="producer_email_label">Email</string>
+    <string name="producer_website_label">Website</string>
+    <string name="producer_website_hint">https://example.com</string>
+
+
     <string name="choose_image_label">Choose Image</string>
     <!--    CRUD command button texts-->
     <string name="close">Close</string>
@@ -31,6 +38,7 @@
     <string name="cancel">Cancel</string>
 
     <string name="api_url">http://192.168.100.201:8000/api/</string>
+
 
     <!--    labels-->
     <string name="films">Films</string>
