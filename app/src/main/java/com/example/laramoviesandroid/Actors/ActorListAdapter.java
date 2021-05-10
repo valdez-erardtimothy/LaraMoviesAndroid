@@ -39,6 +39,11 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
     private ArrayList<Actor> mActors;
     private FragmentManager parentActivityFragmentManager;
 
+   public void addActor(Actor toAdd) {
+       mActors.add(toAdd);
+       this.notifyItemInserted(getItemCount()-1);
+   }
+
     @NonNull
     @Override
     public ActorListAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

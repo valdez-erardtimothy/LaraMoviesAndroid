@@ -59,7 +59,7 @@
         <item>@string/delete</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-<!--    action bar titles-->
+    <!--    action bar titles-->
     <string name="main_menu_title">@string/app_name</string>
     <string name="actor_list_title">Actors</string>
     <string name="actor_edit_title">Edit Actor</string>

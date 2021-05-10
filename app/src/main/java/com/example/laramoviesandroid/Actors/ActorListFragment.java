@@ -18,9 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.MainActivity;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.Singletons.GlobalMembers;
 import com.example.laramoviesandroid.models.Actor;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +40,8 @@ import java.util.Map;
 public class ActorListFragment extends Fragment {
     private ActorListAdapter mActorAdapter;
     private RecyclerView mActorRecyclerView;
+    private FloatingActionButton mFabAdd;
+
     ArrayList<Actor> mActors;
 
     public ActorListFragment() {
@@ -62,6 +66,15 @@ public class ActorListFragment extends Fragment {
         return fragmentView;
     }
 
+    void initializeButtonListeners() {
+        mFabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).launchNewFragment(ActorAddFragment.newInstance(mActorAdapter), true);
+            }
+        });
+    }
+
     public void initializeMembers(View v) {
         mActorRecyclerView = (RecyclerView) v.findViewById(R.id.rv_actor_list);
         mActors = new ArrayList<Actor>();
@@ -69,6 +82,8 @@ public class ActorListFragment extends Fragment {
         mActorRecyclerView.setHasFixedSize(true);
         mActorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mActorRecyclerView.setAdapter(mActorAdapter);
+        mFabAdd = v.findViewById(R.id.fab_actor_list_add);
+        this.initializeButtonListeners();
     }
 
     public void findAndRenderActors() {
