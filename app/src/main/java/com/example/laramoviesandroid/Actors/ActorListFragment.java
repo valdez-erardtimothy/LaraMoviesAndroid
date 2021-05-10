@@ -70,7 +70,7 @@ public class ActorListFragment extends Fragment {
         mFabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).launchNewFragment(ActorAddFragment.newInstance(mActorAdapter), true);
+                ((MainActivity)getActivity()).launchNewFragment(ActorAddFragment.newInstance(), true);
             }
         });
     }

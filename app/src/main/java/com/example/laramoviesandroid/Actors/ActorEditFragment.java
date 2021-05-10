@@ -1,9 +1,7 @@
 package com.example.laramoviesandroid.Actors;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,8 +48,6 @@ public class ActorEditFragment extends Fragment {
     RecyclerView mRvActorFilmography;
 
     Actor mActorToEdit;
-    ActorListAdapter mParentAdapter;
-    int mAdapterPosition;
     ActorFilmographyAdapter mFilmographyAdapter;
 
 
@@ -201,7 +196,6 @@ public class ActorEditFragment extends Fragment {
                         try {
                             Toast.makeText(getContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                             Actor.buildFromJSON(response.getJSONObject("actor"), mActorToEdit);
-                            mParentAdapter.notifyItemChanged(mAdapterPosition);
 //                            get back to list upon edit
                             getActivity().onBackPressed();
                         } catch (JSONException e) {
@@ -220,15 +214,11 @@ public class ActorEditFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param toEdit the Actor to edit
-     * @param parentAdapter the actor list adapter
-     * @param adapterPosition the position of the actor in list adapter
      * @return A new instance of fragment {@link ActorEditFragment}.
      */
-    public static ActorEditFragment newInstance(Actor toEdit, ActorListAdapter parentAdapter, int adapterPosition) {
+    public static ActorEditFragment newInstance(Actor toEdit) {
         ActorEditFragment fragment = new ActorEditFragment();
         fragment.mActorToEdit = toEdit;
-        fragment.mParentAdapter = parentAdapter;
-        fragment.mAdapterPosition = adapterPosition;
         return fragment;
     }
 }

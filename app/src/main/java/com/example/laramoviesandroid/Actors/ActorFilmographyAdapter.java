@@ -52,8 +52,7 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
     }
 
     public ActorFilmographyAdapter(ArrayList<FilmActor> dataSet) {
-        this.mActorFilmography = dataSet;
-        mContentsEditable = false;
+        this(dataSet, false);
     }
 
     /**

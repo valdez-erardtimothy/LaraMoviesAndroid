@@ -107,11 +107,7 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
                                 case 0:
                                     MainActivity rootActivity = (MainActivity) v.getContext();
                                     rootActivity.launchNewFragment(
-                                            ActorEditFragment.newInstance(
-                                                    selectedActor,
-                                                    ActorListAdapter.this,
-                                                    getAdapterPosition())
-                                        ,true
+                                            ActorEditFragment.newInstance(selectedActor),true
                                     );
                                     break;
                                 case 1:
@@ -128,6 +124,7 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
     public ActorListAdapter(ArrayList<Actor> dataSet, FragmentManager parentActivityFragmentManager) {
         mActors = dataSet;
         this.parentActivityFragmentManager = parentActivityFragmentManager;
+
     }
 
     /**
