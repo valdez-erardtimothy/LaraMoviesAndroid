@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.example.laramoviesandroid.Actors.ActorListFragment;
 import com.example.laramoviesandroid.Singletons.GlobalMembers;
+import com.example.laramoviesandroid.producers.ProducerListFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,6 +79,12 @@ public class MainMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mParentActivity.launchNewFragment(new ActorListFragment(), true);
+            }
+        });
+        mButtonProducers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mParentActivity.launchNewFragment(ProducerListFragment.newInstance(), true);
             }
         });
     }
