@@ -68,19 +68,9 @@ public class FilmViewDialogFragment extends DialogFragment {
         loadFilmActorsAndProducers();
         Picasso.get().load(mFilm.getPosterURL()).into(ivPoster);
         builder.setView(view)
-                .setPositiveButton(R.string.edit, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-//                        redirect to edit
-                    }
-                })
-                .setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
-                    }
-                })
-                .setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
                         FilmViewDialogFragment.this.getDialog().cancel();
                     }
                 });

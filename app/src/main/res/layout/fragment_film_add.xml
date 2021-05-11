@@ -137,16 +137,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/image_film_add_poster" />
 
-                <ImageView
-                    android:id="@+id/image_film_add_poster"
-                    android:layout_width="300dp"
-                    android:layout_height="450dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19"
-                    tools:src="@tools:sample/backgrounds/scenic" />
-
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
@@ -194,6 +184,15 @@
                     android:text="@string/choose_image_label"
                     app:layout_constraintStart_toEndOf="@+id/textView19"
                     app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+                <ImageView
+                    android:id="@+id/image_film_add_poster"
+                    android:layout_width="300dp"
+                    android:layout_height="450dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_film_add_choose_image"
+                    tools:src="@tools:sample/backgrounds/scenic" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

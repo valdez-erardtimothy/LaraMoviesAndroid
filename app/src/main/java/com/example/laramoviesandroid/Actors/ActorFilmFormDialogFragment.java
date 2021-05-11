@@ -108,7 +108,7 @@ public class ActorFilmFormDialogFragment extends DialogFragment {
                     public void onResponse(JSONObject serverResponse) {
                         try {
                             int actor_film_iterator = 0;
-                            int position = 0;
+                            int position = -1;
                             JSONObject response = new JSONObject(String.valueOf(serverResponse));
                             JSONArray films = response.getJSONArray("films");
                             for(int i = 0; i < films.length(); i++) {
@@ -126,7 +126,7 @@ public class ActorFilmFormDialogFragment extends DialogFragment {
                             mFilmsSpinner.setAdapter(mSpinnerAdapter);
 //                            select the film the corresponds to the current entry
 //                            this will only get to > 0 when it is called via edit
-                            if(position > 0 ) {
+                            if(position > -1 ) {
                                 mFilmsSpinner.setSelection(position);
                                 mEditCharacterName.setText(mActorFilm.getCharacterName());
 //                                disable editing the spinner to ensure that only the film will be edited

@@ -83,4 +83,6 @@
     <string name="actor">Actor</string>
     <string name="add_actor_film_addeditactor">Add/Edit Actor Film For--</string>
     <string name="as">as</string>
+    <string name="add_producer">Add Producer</string>
+    <string name="add_actor">Add Actor</string>
 </resources>
