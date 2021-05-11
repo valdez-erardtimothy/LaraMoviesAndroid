@@ -74,13 +74,6 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
                             // of the selected item
                             switch (which) {
                                 case 0:
-//                                    mainActivity.launchNewFragment(
-//                                            ProducerFormFragment.newInstance(
-//                                                    boundProducer,
-//                                                    ProducerListAdapter.this,
-//                                                    getAdapterPosition())
-//                                            ,true
-//                                    );
                                     ActorFilmFormDialogFragment.newInstance(selectedActorFilm, ActorFilmographyAdapter.this)
                                             .show(fm, null);
                                     break;

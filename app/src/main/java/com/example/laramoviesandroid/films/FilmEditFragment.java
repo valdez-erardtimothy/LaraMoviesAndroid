@@ -29,6 +29,7 @@ import com.example.laramoviesandroid.Actors.ActorEditFragment;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.authentication.AuthenticatedJSONObjectRequest;
 import com.example.laramoviesandroid.models.Film;
+import com.example.laramoviesandroid.models.FilmActor;
 import com.example.laramoviesandroid.models.Genre;
 import com.example.laramoviesandroid.utilities.ImageUtilities;
 import com.squareup.picasso.Picasso;
@@ -60,6 +61,9 @@ public class FilmEditFragment extends Fragment {
     FilmProducersListAdapter mFilmProducersAdapter;
     int genreSpinnerSelectedId;
     ImageView mIvPoster;
+
+    Button mBtnAddProducer;
+    Button mBtnAddActor;
     public FilmEditFragment() {
         // Required empty public constructor
     }
@@ -101,8 +105,10 @@ public class FilmEditFragment extends Fragment {
         mIvPoster = view.findViewById(R.id.image_film_edit_poster);
         mRvFilmActors = view.findViewById(R.id.rv_film_edit_film_actors);
         mRvFilmProducers=view.findViewById(R.id.rv_film_edit_film_producers);
-        mFilmActorsAdapter = new FilmActorsListAdapter(mToEdit.getFilmActors(), true);
-        mFilmProducersAdapter = new FilmProducersListAdapter(mToEdit.getFilmProducers(), true );
+        mBtnAddActor = view.findViewById(R.id.button_film_edit_add_actor);
+        mBtnAddProducer = view.findViewById(R.id.button_film_edit_add_producer);
+        mFilmActorsAdapter = new FilmActorsListAdapter(mToEdit.getFilmActors(), true, getChildFragmentManager());
+        mFilmProducersAdapter = new FilmProducersListAdapter(mToEdit.getFilmProducers(), true);
         mRvFilmActors.setHasFixedSize(true);
         mRvFilmActors.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvFilmActors.setAdapter(mFilmActorsAdapter);
@@ -223,6 +229,17 @@ public class FilmEditFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 chooseImageFromGallery();
+            }
+        });
+        mBtnAddActor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilmActorFormDialogFragment.newInstance(
+                        new FilmActor().setFilmId(mToEdit.getId())
+                        .setFilmName(mToEdit.getTitle())
+                        .setActorId(0),
+                        mFilmActorsAdapter
+                ).show(getChildFragmentManager(), null);
             }
         });
     }
