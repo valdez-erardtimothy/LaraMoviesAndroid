@@ -99,7 +99,7 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
     void deleteFilmographyRequest(int position, FilmActor filmographyEntry, Context context) {
         AuthenticatedJSONObjectRequest req = new AuthenticatedJSONObjectRequest(
                 Request.Method.GET,
-                context.getResources().getString(R.string.api_url) + "com/example/laramoviesandroid/" + filmographyEntry.getFilmId() + "/remove-film-actor/" + filmographyEntry.getActorId(),
+                context.getResources().getString(R.string.api_url) + "films/" + filmographyEntry.getFilmId() + "/remove-film-actor/" + filmographyEntry.getActorId(),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override

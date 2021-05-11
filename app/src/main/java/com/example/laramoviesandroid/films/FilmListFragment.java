@@ -18,9 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.MainActivity;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.Singletons.GlobalMembers;
 import com.example.laramoviesandroid.models.Film;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +40,7 @@ public class FilmListFragment extends Fragment {
     private Context mContext;
     private ArrayList<Film> mFilms;
     private FilmListAdapter mFilmAdapter;
+    private FloatingActionButton fabAddFilm;
 
 
     public FilmListFragment() {
@@ -138,6 +141,14 @@ public class FilmListFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
         mRecyclerView.setAdapter(mFilmAdapter);
+
+        fabAddFilm = v.findViewById(R.id.fab_film_list_add);
+        fabAddFilm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).launchNewFragment(FilmAddFragment.newInstance(), true);
+            }
+        });
 
     }
 
