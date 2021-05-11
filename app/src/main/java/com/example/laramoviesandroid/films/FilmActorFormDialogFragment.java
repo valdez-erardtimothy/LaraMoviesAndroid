@@ -66,7 +66,6 @@ public class FilmActorFormDialogFragment extends DialogFragment {
         mFilmName.setText(mFilmActor.getFilmName());
         mSpinnerAdapter = new FilmActorFormActorsSpinnerAdapter(
                 getContext(),
-//                R.layout.fragment_actor_film_form_dialog,
                 R.layout.spinner_textview,
                 mActors
         );

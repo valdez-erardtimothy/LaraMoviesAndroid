@@ -30,6 +30,7 @@ import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.authentication.AuthenticatedJSONObjectRequest;
 import com.example.laramoviesandroid.models.Film;
 import com.example.laramoviesandroid.models.FilmActor;
+import com.example.laramoviesandroid.models.FilmProducer;
 import com.example.laramoviesandroid.models.Genre;
 import com.example.laramoviesandroid.utilities.ImageUtilities;
 import com.squareup.picasso.Picasso;
@@ -109,11 +110,11 @@ public class FilmEditFragment extends Fragment {
         mBtnAddProducer = view.findViewById(R.id.button_film_edit_add_producer);
         mFilmActorsAdapter = new FilmActorsListAdapter(mToEdit.getFilmActors(), true, getChildFragmentManager());
         mFilmProducersAdapter = new FilmProducersListAdapter(mToEdit.getFilmProducers(), true);
-        mRvFilmActors.setHasFixedSize(true);
+        mRvFilmActors.setHasFixedSize(false);
         mRvFilmActors.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvFilmActors.setAdapter(mFilmActorsAdapter);
 
-        mRvFilmProducers.setHasFixedSize(true);
+        mRvFilmProducers.setHasFixedSize(false);
         mRvFilmProducers.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvFilmProducers.setAdapter(mFilmProducersAdapter);
 
@@ -239,6 +240,17 @@ public class FilmEditFragment extends Fragment {
                         .setFilmName(mToEdit.getTitle())
                         .setActorId(0),
                         mFilmActorsAdapter
+                ).show(getChildFragmentManager(), null);
+            }
+        });
+        mBtnAddProducer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilmProducerFormDialogFragment.newInstance(
+                        new FilmProducer().setFilmId(mToEdit.getId())
+                        .setFilmTitle(mToEdit.getTitle())
+                        .setProducerId(0),
+                        mFilmProducersAdapter
                 ).show(getChildFragmentManager(), null);
             }
         });
