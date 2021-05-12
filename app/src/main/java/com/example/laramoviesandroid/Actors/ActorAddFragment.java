@@ -52,7 +52,6 @@ public class ActorAddFragment extends Fragment {
      *
      * @return A new instance of fragment ActorAddFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ActorAddFragment newInstance() {
         ActorAddFragment fragment = new ActorAddFragment();
         return fragment;
@@ -155,14 +154,6 @@ public class ActorAddFragment extends Fragment {
         if(requestCode == ActorEditFragment.GET_PORTRAIT_EDIT && resultCode == RESULT_OK && data != null) {
             Toast.makeText(getContext(), "Image Selected!", Toast.LENGTH_SHORT).show();
             Uri selectedImage = data.getData();
-//            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//            Cursor cursor = getActivity().getContentResolver().query(selectedImage,
-//                    filePathColumn, null, null, null);
-//            cursor.moveToFirst();
-//
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String picturePath = cursor.getString(columnIndex);
-//            cursor.close();
 
             Picasso.get().load(selectedImage).into(mIvPortrait);
         }

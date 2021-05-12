@@ -47,6 +47,7 @@ public class ActorEditFragment extends Fragment {
     Button mBtnEdit;
     Button mBtnCancel;
     Button mBtnChooseImage;
+
     RecyclerView mRvActorFilmography;
     FloatingActionButton mFabAddActorFilm;
 

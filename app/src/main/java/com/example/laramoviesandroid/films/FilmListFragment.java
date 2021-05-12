@@ -1,19 +1,13 @@
-package com.example.laramoviesandroid;
+package com.example.laramoviesandroid.films;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,11 +16,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.MainActivity;
+import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.Singletons.GlobalMembers;
 import com.example.laramoviesandroid.models.Film;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,9 +31,7 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,11 +40,11 @@ public class FilmListFragment extends Fragment {
     private Context mContext;
     private ArrayList<Film> mFilms;
     private FilmListAdapter mFilmAdapter;
-    private FragmentManager mParentFragmentManager;
+    private FloatingActionButton fabAddFilm;
 
-    public FilmListFragment(FragmentManager fm) {
+
+    public FilmListFragment() {
         super(R.layout.fragment_film_list);
-        this.mParentFragmentManager = fm;
         Log.i(null, "Film List Fragment created");
     }
 
@@ -102,26 +96,14 @@ public class FilmListFragment extends Fragment {
                                 }
                                 Log.i(null, "genre id:" + Integer.toString(currentFilm.getInt("genre_id")));
 
-                                Film newFilm = Film.builder(currentFilm.getInt("id"))
-                                        .setTitle(currentFilm.getString("film_title"))
-                                        .setDuration(currentFilm.getInt("duration"))
-                                        .setGenre(currentFilm.getInt("genre_id"))
-                                        .setGenre(genre)
-                                        .setReleaseDate(
-                                                new SimpleDateFormat("yyyy-MM-dd")
-                                                        .parse(currentFilm.getString("release_date"))
-                                        )
-                                        .setPosterURL(currentFilm.getString("poster"))
-                                        .setAdditionalInfo(currentFilm.getString("additional_info"))
-                                        .setStory(currentFilm.getString("story"))
-                                        .build();
+                                Film newFilm = Film.newFilmFromJSON(currentFilm);
 
-                                newFilm.setJson(currentFilm);
                                 mFilms.add(newFilm);
-                                mFilmAdapter.notifyDataSetChanged();
+
 
                                 Log.i (null, "new film title:"+ newFilm.getTitle());
                             }
+                            mFilmAdapter.notifyDataSetChanged();
 
                         } catch (JSONException | ParseException e ) {
                             e.printStackTrace();
@@ -152,13 +134,21 @@ public class FilmListFragment extends Fragment {
     protected void setMemberVariables(View v){
         mContext = getContext();
         mRecyclerView = (RecyclerView) v.findViewById(R.id.rv_film_list);
-        mFilmAdapter = new FilmListAdapter(mFilms, mParentFragmentManager);
+        mFilmAdapter = new FilmListAdapter(mFilms, getChildFragmentManager());
 
         // set recycler view configuration
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
         mRecyclerView.setAdapter(mFilmAdapter);
+
+        fabAddFilm = v.findViewById(R.id.fab_film_list_add);
+        fabAddFilm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).launchNewFragment(FilmAddFragment.newInstance(), true);
+            }
+        });
 
     }
 

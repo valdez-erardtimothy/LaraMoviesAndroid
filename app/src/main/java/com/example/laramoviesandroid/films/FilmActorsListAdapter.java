@@ -1,4 +1,4 @@
-package com.example.laramoviesandroid.Actors;
+package com.example.laramoviesandroid.films;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.laramoviesandroid.Actors.ActorFilmFormDialogFragment;
+import com.example.laramoviesandroid.Actors.ActorFilmographyAdapter;
 import com.example.laramoviesandroid.R;
 import com.example.laramoviesandroid.authentication.AuthenticatedJSONObjectRequest;
 import com.example.laramoviesandroid.models.FilmActor;
@@ -24,43 +26,54 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmographyAdapter.ActorFilmographyViewHolder> {
-    private ArrayList<FilmActor>mActorFilmography;
-    private boolean mContentsEditable;
-    FragmentManager fm; //will be null when not editable
+public class FilmActorsListAdapter extends  RecyclerView.Adapter<FilmActorsListAdapter.FilmActorsViewHolder>{
+    private ArrayList<FilmActor> mFilmActors;
+    private boolean mHoldersEditable;
+    private FragmentManager fm;
+
+     public FilmActorsListAdapter(ArrayList<FilmActor> dataSet, boolean editable) {
+         mFilmActors = dataSet;
+         mHoldersEditable = editable;
+
+     }
+    public FilmActorsListAdapter(ArrayList<FilmActor> dataSet, boolean editable, FragmentManager fm) {
+        this(dataSet,editable);
+        this.fm = fm;
+    }
     @NonNull
     @Override
-    public ActorFilmographyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.actor_filmography_item, parent, false);
-        return new ActorFilmographyViewHolder(view);
+    public FilmActorsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+         View view = LayoutInflater.from(parent.getContext())
+                 .inflate(R.layout.film_actors_item, parent, false);
+         return new FilmActorsViewHolder(view, mHoldersEditable);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ActorFilmographyViewHolder holder, int position) {
-        holder.selectedActorFilm = mActorFilmography.get(position);
-        holder.tvCharacterName.setText(holder.selectedActorFilm.getCharacterName());
-        holder.tvFilmTitle.setText(holder.selectedActorFilm.getFilmName());
+    public void onBindViewHolder(@NonNull FilmActorsViewHolder holder, int position) {
+         FilmActor currentFilmActor = mFilmActors.get(position);
+         holder.boundFilmActor = currentFilmActor;
+         holder.mTvActorName.setText(currentFilmActor.getActorName());
+         holder.mTvCharacter.setText(currentFilmActor.getCharacterName());
     }
 
     @Override
     public int getItemCount() {
-        return mActorFilmography.size();
+        return mFilmActors.size();
     }
 
-    /**
-     * the view for actor filmography items.
-     * set all the filmography item interaction here.
-     */
-    public class ActorFilmographyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
-        private TextView tvCharacterName;
-        private TextView tvFilmTitle;
-        public FilmActor selectedActorFilm;
-        public ActorFilmographyViewHolder(@NonNull View itemView) {
+    public class FilmActorsViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+        private boolean mHolderEditable;
+        private TextView mTvActorName, mTvCharacter;
+        private FilmActor boundFilmActor;
+         public FilmActorsViewHolder(@NonNull View itemView, boolean editable) {
             super(itemView);
-            tvCharacterName = (TextView) itemView.findViewById(R.id.text_actor_filmography_item_character);
-            tvFilmTitle = (TextView) itemView.findViewById(R.id.text_actor_filmography_item_film_title);
-            if(mContentsEditable) itemView.setOnLongClickListener(ActorFilmographyViewHolder.this);
+            mHolderEditable = editable;
+            mTvActorName = itemView.findViewById(R.id.text_film_actors_item_actor_name);
+            mTvCharacter = itemView.findViewById(R.id.text_film_actors_item_character_name);
+            if(mHolderEditable) {
+                itemView.setOnLongClickListener(this);
+
+            }
         }
 
         @Override
@@ -74,25 +87,28 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
                             // of the selected item
                             switch (which) {
                                 case 0:
-                                    ActorFilmFormDialogFragment.newInstance(selectedActorFilm, ActorFilmographyAdapter.this)
+                                    FilmActorFormDialogFragment.newInstance(boundFilmActor, FilmActorsListAdapter.this)
                                             .show(fm, null);
                                     break;
                                 case 1:
                                     // delete button
 //                                    deleteRequest(boundProducer, getAdapterPosition(), v.getContext());
-                                    deleteFilmographyRequest(getAdapterPosition(), selectedActorFilm, v.getContext());
+                                    deleteFilmographyRequest(getAdapterPosition(), boundFilmActor, v.getContext());
                                     break;
                             }
                         }
                     }).show();
-            return true;
+            return false;
         }
     }
-
     void deleteFilmographyRequest(int position, FilmActor filmographyEntry, Context context) {
         AuthenticatedJSONObjectRequest req = new AuthenticatedJSONObjectRequest(
                 Request.Method.GET,
-                context.getResources().getString(R.string.api_url) + "films/" + filmographyEntry.getFilmId() + "/remove-film-actor/" + filmographyEntry.getActorId(),
+                context.getResources().getString(R.string.api_url)
+                        + "films/"
+                        + filmographyEntry.getFilmId()
+                        + "/remove-film-actor/"
+                        + filmographyEntry.getActorId(),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -105,31 +121,17 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
         Volley.newRequestQueue(context).add(req);
     }
 
-    public ActorFilmographyAdapter(ArrayList<FilmActor> dataSet) {
-        this(dataSet, false, null);
-    }
 
-    /**
-     *
-     * @param dataSet
-     * @param editable true if in actor edit, false (or leave blank) if in actor view.
-     */
-    public ActorFilmographyAdapter(ArrayList<FilmActor> dataSet, boolean editable, FragmentManager fm) {
-        this.mActorFilmography = dataSet;
-        this.mContentsEditable = editable;
-        this.fm = fm;
-    }
-
+    // crud for adapter recycler only
     void removeFilmographyEntry(int position) {
-        mActorFilmography.remove(position);
+        mFilmActors.remove(position);
         this.notifyItemRemoved(position);
     }
 
     public void addFilmographyEntry(FilmActor filmographyEntry) {
-        mActorFilmography.add(filmographyEntry);
+        mFilmActors.add(filmographyEntry);
         this.notifyItemInserted(getItemCount()-1);
     }
-
     /**
      * replaces the filmography entry with
      * @param newFilmographyDetails - the FilmActor to replace the old one with.
@@ -137,8 +139,8 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
     void searchAndUpdateFilmographyEntry(FilmActor newFilmographyDetails) {
         int position = 0;
         boolean found =false;
-        for(FilmActor entry : mActorFilmography) {
-            if(newFilmographyDetails.getFilmId() == entry.getFilmId()) {
+        for(FilmActor entry : mFilmActors) {
+            if(newFilmographyDetails.getActorId() == entry.getActorId()) {
 
                 found=true;
                 break;
@@ -146,10 +148,8 @@ public class ActorFilmographyAdapter extends RecyclerView.Adapter<ActorFilmograp
             position++;
         }
         if(found) {
-            mActorFilmography.set(position, newFilmographyDetails);
+            mFilmActors.set(position, newFilmographyDetails);
             this.notifyItemChanged(position);
         }
     }
-
-
 }

@@ -14,6 +14,8 @@ import com.example.laramoviesandroid.Actors.ActorListFragment;
 import com.example.laramoviesandroid.Singletons.GlobalMembers;
 import com.example.laramoviesandroid.producers.ProducerListFragment;
 
+import com.example.laramoviesandroid.films.FilmListFragment;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -72,7 +74,7 @@ public class MainMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                mParentActivity.launchNewFragment(new FilmListFragment(mParentActivity.getSupportFragmentManager()), true);
+                mParentActivity.launchNewFragment(new FilmListFragment(), true);
             }
         });
         mButtonActors.setOnClickListener(new View.OnClickListener() {
